@@ -14,16 +14,25 @@ const milUniElement = document.getElementById('milUni');
 const splitsElement = document.getElementById('splits');
 
 function printTime() {
-  // ... your code goes here
+
+  printMinutes()
+  printSeconds()
 }
 
 function printMinutes() {
-  // ... your code goes here
-}
+  let min = chronometer.getMinutes();
+  let min2var = chronometer.computeTwoDigitNumber(min)
+  minDecElement.innerText = min2var[0]
+  minUniElement.innerText = min2var[1]
+ }
 
-function printSeconds() {
-  // ... your code goes here
-}
+ function printSeconds() {
+   let sec = chronometer.getSeconds();
+   let sec2var = chronometer.computeTwoDigitNumber(sec)
+   secDecElement.innerText = sec2var[0]
+   secUniElement.innerText = sec2var[1]
+ 
+ }
 
 // ==> BONUS
 function printMilliseconds() {
@@ -31,11 +40,14 @@ function printMilliseconds() {
 }
 
 function printSplit() {
-  // ... your code goes here
+  const newSplit = document.createElement("li")
+  newSplit.innerText =  chronometer.split()
+  splitsElement.appendChild(newSplit)
 }
 
 function clearSplits() {
-  // ... your code goes here
+splitsElement
+
 }
 
 function setStopBtn() {
@@ -56,10 +68,31 @@ function setResetBtn() {
 
 // Start/Stop Button
 btnLeftElement.addEventListener('click', () => {
-  // ... your code goes here
+
+  btnLeftElement.classList.toggle("start")
+  btnLeftElement.classList.toggle("stop")
+
+  btnRightElement.classList.toggle("split")
+  btnRightElement.classList.toggle("reset")
+
+  if (btnLeftElement.innerText === "START") {
+    btnLeftElement.innerText = "STOP"
+    btnRightElement.innerText = "SPLIT"
+    chronometer.start(printTime)
+  } else {
+    btnLeftElement.innerText = "START"
+    btnRightElement.innerText = "RESET"
+    chronometer.stop()
+  }
 });
 
 // Reset/Split Button
 btnRightElement.addEventListener('click', () => {
-  // ... your code goes here
-});
+  if (btnRightElement.innerText === "SPLIT") printSplit()
+  if (btnRightElement.innerText === "RESET") {
+    chronometer.reset(printTime)
+    splitsElement.removeChild()
+  }
+  
+  
+ });
