@@ -46,7 +46,8 @@ function printSplit() {
 }
 
 function clearSplits() {
-  // ... your code goes here
+splitsElement
+
 }
 
 function setStopBtn() {
@@ -88,6 +89,10 @@ btnLeftElement.addEventListener('click', () => {
 // Reset/Split Button
 btnRightElement.addEventListener('click', () => {
   if (btnRightElement.innerText === "SPLIT") printSplit()
+  if (btnRightElement.innerText === "RESET") {
+    chronometer.reset(printTime)
+    splitsElement.removeChild()
+  }
   
   
  });

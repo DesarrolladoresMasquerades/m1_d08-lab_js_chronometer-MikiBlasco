@@ -28,8 +28,10 @@ class Chronometer {
     clearInterval(this.intervalId)
   }
 
-  reset() {
+  reset(callback) {
     this.currentTime = 0
+    if (callback) callback()
+
   }
 
   split() {
